@@ -19,12 +19,17 @@ jobs:
         echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
     - name: use lowercase repo
       run: echo "The value of REPO is ${REPO} OR ${{ steps.lowercase-repo.outputs.lowercase_repo }}"
+    - id: string
+      uses: ASzc/change-string-case-action@v1
+      with:
+        string: ${{ github.repository }}
+      
 
     - name: Build Image
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: ${REPO}
+        image: ${{ steps.string.outputs.lowercase }}
         tags: latest ${{ github.sha }}
         dockerfiles: |
           ./Dockerfile

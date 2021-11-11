@@ -15,7 +15,7 @@ jobs:
 
     - name: downcase REPO name
       run: |
-        echo "REPO=${GITHUB_REPOSITORY,,}"
+        echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
     - name: Build Image
       id: build-image
       uses: redhat-actions/buildah-build@v2

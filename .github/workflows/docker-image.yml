@@ -16,11 +16,13 @@ jobs:
     - name: downcase REPO name
       run: |
         echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+    - name: use REPO
+      run: echo "The value of REPO is: ${REPO}"
     - name: Build Image
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: ${{ REPO }}
+        image: ${REPO}
         tags: latest ${{ github.sha }}
         dockerfiles: |
           ./Dockerfile

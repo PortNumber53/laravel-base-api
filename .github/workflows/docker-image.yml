@@ -43,7 +43,7 @@ jobs:
       with:
         image: ${{ github.event.repository.name }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: quay.io/portnumber53/test
+        registry: quay.io/portnumber53
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 

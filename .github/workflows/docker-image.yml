@@ -17,7 +17,6 @@ jobs:
       uses: ASzc/change-string-case-action@v1
       with:
         string: ${{ github.event.repository.name }}
-      
 
     - name: Build Image
       id: build-image
@@ -28,7 +27,6 @@ jobs:
         dockerfiles: |
           ./Dockerfile
 
-      
     # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
     # in which case 'username' and 'password' can be omitted.
     - name: Push To quay.io
@@ -37,7 +35,7 @@ jobs:
       with:
         image: ${{ github.event.repository.name }}
         tags: ${{ steps.build-image.outputs.tags }}
-        registry: quay.io/portnumber53
+        registry: ${{ secrets.REGISTRY_REPOSITORY }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 

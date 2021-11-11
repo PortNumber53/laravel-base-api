@@ -13,11 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: downcase REPO name
+      run: |
+        echo "REPO=${GITHUB_REPOSITORY,,}"
     - name: Build Image
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: ${{ github.repository }}
+        image: ${{ REPO }}
         tags: latest ${{ github.sha }}
         dockerfiles: |
           ./Dockerfile
